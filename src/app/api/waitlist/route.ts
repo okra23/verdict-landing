@@ -24,13 +24,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!   // ← service role bypasses RLS
-)
+// Lazy client init so a missing env var fails the request, not the build.
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY  // service role bypasses RLS
+  if (!url || !key) throw new Error('Supabase env vars not configured')
+  return createClient(url, key)
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase()
     const { email } = await req.json()
 
     // Basic validation
