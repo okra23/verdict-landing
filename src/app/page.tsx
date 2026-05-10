@@ -138,6 +138,40 @@ function Logo() {
   )
 }
 
+function LogoMark({ size = 36 }: { size?: number }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
+      <rect width="64" height="64" rx="10" fill={V.black} />
+      <polyline points="6,12 24,45 32,31" stroke={V.red} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.55" />
+      <polyline points="24,45 32,31 58,9" stroke={V.red} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="24" cy="45" r="6.5" fill={V.yellow} />
+    </svg>
+  )
+}
+
+function LogoLockup() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <LogoMark size={36} />
+      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+        <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 26, letterSpacing: 2, color: V.white }}>
+          <span style={{ color: V.red }}>V</span>ERDICT
+        </div>
+        <div style={{
+          fontFamily: "'Barlow Condensed', sans-serif",
+          fontSize: 10,
+          letterSpacing: 1.8,
+          textTransform: 'uppercase' as const,
+          color: V.w70,
+          marginTop: 4,
+        }}>
+          Stop Guessing. Get a Verdict.
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ComingSoonBadge() {
   return (
     <span style={{
@@ -346,7 +380,7 @@ export default function ComingSoonPage() {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-        <Logo />
+        <LogoLockup />
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <ComingSoonBadge />
           <button
